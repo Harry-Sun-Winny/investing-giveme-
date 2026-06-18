@@ -1,0 +1,1 @@
+ALTER TABLE watchlist_items ADD COLUMN IF NOT EXISTS asset_name VARCHAR(255); 

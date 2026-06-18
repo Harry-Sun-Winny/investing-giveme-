@@ -1,0 +1,9 @@
+backend/target/
+frontend/.next/
+frontend/node_modules/
+mobile/.dart_tool/
+mobile/build/
+*.log
+.env
+.env.*
+

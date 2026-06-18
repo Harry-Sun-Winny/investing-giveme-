@@ -1,0 +1,472 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   🌈  RAINBOW DESIGN SYSTEM — 7 Sắc Cầu Vồng
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Rainbow palette ─────────────────────────────────────────────────────── */
+  --rainbow-red:    #ff6b6b;
+  --rainbow-orange: #ff9f43;
+  --rainbow-yellow: #feca57;
+  --rainbow-green:  #0abf53;
+  --rainbow-blue:   #54a0ff;
+  --rainbow-indigo: #5f27cd;
+  --rainbow-violet: #c44dff;
+
+  /* ── Soft variants (15% opacity for backgrounds) ─────────────────────────── */
+  --rainbow-red-soft:    rgba(255, 107, 107, 0.12);
+  --rainbow-orange-soft: rgba(255, 159, 67, 0.12);
+  --rainbow-yellow-soft: rgba(254, 202, 87, 0.12);
+  --rainbow-green-soft:  rgba(10, 191, 83, 0.12);
+  --rainbow-blue-soft:   rgba(84, 160, 255, 0.12);
+  --rainbow-indigo-soft: rgba(95, 39, 205, 0.15);
+  --rainbow-violet-soft: rgba(196, 77, 255, 0.12);
+
+  /* ── Full rainbow gradient ───────────────────────────────────────────────── */
+  --rainbow-gradient: linear-gradient(
+    135deg,
+    var(--rainbow-red),
+    var(--rainbow-orange),
+    var(--rainbow-yellow),
+    var(--rainbow-green),
+    var(--rainbow-blue),
+    var(--rainbow-indigo),
+    var(--rainbow-violet)
+  );
+
+  /* ── App tokens ──────────────────────────────────────────────────────────── */
+  --app-bg: #050816;
+  --app-sidebar: #070b18;
+  --app-panel: rgba(15, 23, 42, 0.78);
+  --app-panel-soft: rgba(30, 41, 59, 0.74);
+  --app-border: rgba(148, 163, 184, 0.18);
+  --app-accent: #54a0ff;
+  --app-accent-soft: rgba(84, 160, 255, 0.12);
+
+  /* ── shadcn tokens ───────────────────────────────────────────────────────── */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  /* ── Rainbow chart colors ────────────────────────────────────────────────── */
+  --chart-1: var(--rainbow-blue);
+  --chart-2: var(--rainbow-green);
+  --chart-3: var(--rainbow-violet);
+  --chart-4: var(--rainbow-orange);
+  --chart-5: var(--rainbow-yellow);
+
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   🎬  KEYFRAME ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes rainbow-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(84, 160, 255, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(196, 77, 255, 0.5), 0 0 40px rgba(84, 160, 255, 0.2); }
+}
+
+@keyframes rainbow-border-spin {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   🌈  RAINBOW UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Rainbow gradient text */
+.rainbow-text {
+  background: var(--rainbow-gradient);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow-shift 6s ease infinite;
+}
+
+/* Rainbow gradient background (animated) */
+.rainbow-bg {
+  background: var(--rainbow-gradient);
+  background-size: 400% 400%;
+  animation: rainbow-shift 8s ease infinite;
+}
+
+/* Rainbow gradient border via pseudo-element */
+.rainbow-border {
+  position: relative;
+  border: none !important;
+}
+.rainbow-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--rainbow-gradient);
+  background-size: 400% 400%;
+  animation: rainbow-shift 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glassmorphism panel */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 1rem;
+  backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Rainbow glow shadow */
+.rainbow-glow {
+  box-shadow:
+    0 0 15px rgba(255, 107, 107, 0.15),
+    0 0 30px rgba(255, 159, 67, 0.1),
+    0 0 45px rgba(84, 160, 255, 0.08),
+    0 0 60px rgba(196, 77, 255, 0.06);
+}
+
+/* Rainbow button */
+.rainbow-btn {
+  background: var(--rainbow-gradient);
+  background-size: 300% 300%;
+  animation: rainbow-shift 4s ease infinite;
+  color: #fff;
+  font-weight: 800;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.rainbow-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 20px rgba(255, 107, 107, 0.2),
+    0 4px 30px rgba(84, 160, 255, 0.15),
+    0 4px 40px rgba(196, 77, 255, 0.1);
+}
+.rainbow-btn:active {
+  transform: translateY(0);
+}
+.rainbow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Rainbow input focus ring */
+.rainbow-input-focus:focus {
+  border-color: var(--rainbow-blue) !important;
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(84, 160, 255, 0.15),
+    0 0 15px rgba(196, 77, 255, 0.08);
+}
+
+/* Shimmer loading effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Left border accent colors */
+.border-l-rainbow-red    { border-left: 3px solid var(--rainbow-red); }
+.border-l-rainbow-orange { border-left: 3px solid var(--rainbow-orange); }
+.border-l-rainbow-yellow { border-left: 3px solid var(--rainbow-yellow); }
+.border-l-rainbow-green  { border-left: 3px solid var(--rainbow-green); }
+.border-l-rainbow-blue   { border-left: 3px solid var(--rainbow-blue); }
+.border-l-rainbow-indigo { border-left: 3px solid var(--rainbow-indigo); }
+.border-l-rainbow-violet { border-left: 3px solid var(--rainbow-violet); }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   🖼  BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+body {
+  background: var(--app-bg);
+}
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top right, rgba(196, 77, 255, 0.08), transparent 36rem),
+    radial-gradient(ellipse at top left, rgba(84, 160, 255, 0.07), transparent 30rem),
+    radial-gradient(ellipse at bottom center, rgba(10, 191, 83, 0.04), transparent 40rem),
+    var(--app-bg);
+  color: #f8fafc;
+}
+
+.app-sidebar {
+  background: linear-gradient(180deg, rgba(7, 11, 24, 0.98), rgba(5, 8, 22, 0.95));
+  border-right: 1px solid var(--app-border);
+  backdrop-filter: blur(10px);
+}
+
+.app-panel {
+  background: var(--app-panel);
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.app-panel:hover {
+  border-color: rgba(84, 160, 255, 0.25);
+}
+
+.app-panel-soft {
+  background: var(--app-panel-soft);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 0.5rem;
+}
+
+.app-accent {
+  color: var(--app-accent);
+}
+
+.app-input {
+  background: var(--app-panel-soft);
+  border: 1px solid #64748b;
+  color: #fff7ed;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-input:focus {
+  border-color: var(--rainbow-blue);
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(84, 160, 255, 0.12),
+    0 0 12px rgba(196, 77, 255, 0.06);
+}
+
+/* Headings now use blue accent instead of forcing all to cyan */
+.app-shell h2,
+.app-shell h3 {
+  color: var(--app-accent);
+}
+
+/* ── Color overrides for legacy Tailwind color classes ──────────────────────── */
+.app-shell .text-orange-200,
+.app-shell .text-orange-300,
+.app-shell .text-orange-400,
+.app-shell .text-orange-500 {
+  color: var(--app-accent) !important;
+}
+
+.app-shell .text-blue-300,
+.app-shell .text-blue-400,
+.app-shell .text-blue-500,
+.app-shell .text-blue-700,
+.app-shell .text-yellow-300,
+.app-shell .text-yellow-400 {
+  color: var(--app-accent) !important;
+}
+
+.app-shell .bg-orange-400,
+.app-shell .bg-orange-500,
+.app-shell .bg-blue-600,
+.app-shell .bg-lime-500 {
+  background-color: var(--app-accent) !important;
+  color: #020617 !important;
+}
+
+.app-shell .hover\:bg-orange-400:hover,
+.app-shell .hover\:bg-blue-500:hover {
+  background-color: #7dd3fc !important;
+  color: #020617 !important;
+}
+
+.app-shell .border-orange-400,
+.app-shell .focus-within\:border-orange-400:focus-within {
+  border-color: rgba(84, 160, 255, 0.65) !important;
+}
+
+.app-shell .border-blue-500\/20,
+.app-shell .border-blue-500\/30,
+.app-shell .focus\:border-blue-500:focus {
+  border-color: var(--app-accent) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   🎨  TAILWIND / SHADCN THEME
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: var(--rainbow-blue);
+  --chart-2: var(--rainbow-green);
+  --chart-3: var(--rainbow-violet);
+  --chart-4: var(--rainbow-orange);
+  --chart-5: var(--rainbow-yellow);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   📜  CUSTOM SCROLLBAR (Rainbow tint)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(84, 160, 255, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(196, 77, 255, 0.4);
+}
