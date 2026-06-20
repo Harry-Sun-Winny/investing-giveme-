@@ -1,9 +1,9 @@
 services:
   - type: web
     name: investment-platform
-    runtime: java
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/investment-platform-0.1.0.jar
+    runtime: docker
+    rootDir: backend
+    plan: free
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -12,15 +12,20 @@ services:
       - key: SPRING_DATA_REDIS_URL
         fromService:
           name: investment-redis
-          type: redis
+          type: keyvalue
           property: connectionString
-      - key: PORT
-        value: 8080
+      - key: SERVER_PORT
+        value: 10000
+      - key: SECURITY_JWT_SECRET
+        generateValue: true
+
+  - type: keyvalue
+    name: investment-redis
+    plan: free
+    ipAllowList: []
 
 databases:
   - name: investment-db
     databaseName: investment_platform
     user: admin
-
-  - name: investment-redis
-    type: redis
+    plan: free
